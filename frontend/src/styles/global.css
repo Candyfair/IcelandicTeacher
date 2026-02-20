@@ -1,0 +1,330 @@
+/* ─── Base Reset ──────────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Spacing scale — 4px base unit */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+
+  /* Typography */
+  --font-base: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Courier New', Courier, monospace;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --line-height: 1.6;
+
+  /* Light theme tokens */
+  --color-bg: #ffffff;
+  --color-surface: #f5f5f5;
+  --color-border: #e0e0e0;
+  --color-text: #1a1a1a;
+  --color-text-muted: #6b6b6b;
+  --color-accent: #2563eb;
+  --color-accent-hover: #1d4ed8;
+  --color-error: #dc2626;
+  --color-suggestion-bg: #fffbeb;
+  --color-suggestion-border: #f59e0b;
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+}
+
+/* ─── Dark Theme ──────────────────────────────────────────────────────────── */
+
+[data-theme="dark"] {
+  --color-bg: #0f0f0f;
+  --color-surface: #1a1a1a;
+  --color-border: #2e2e2e;
+  --color-text: #f0f0f0;
+  --color-text-muted: #a0a0a0;
+  --color-accent: #3b82f6;
+  --color-accent-hover: #60a5fa;
+  --color-error: #f87171;
+  --color-suggestion-bg: #1f1a0a;
+  --color-suggestion-border: #d97706;
+}
+
+/* ─── Layout ──────────────────────────────────────────────────────────────── */
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-base);
+  font-size: var(--text-base);
+  line-height: var(--line-height);
+  min-height: 100dvh;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+#root {
+  width: 100%;
+}
+
+[data-theme] {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--space-4);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: var(--space-6);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* ─── Typography ──────────────────────────────────────────────────────────── */
+
+h1 {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+}
+
+p {
+  color: var(--color-text);
+}
+
+blockquote {
+  font-style: italic;
+  color: var(--color-text-muted);
+  border-left: 3px solid var(--color-suggestion-border);
+  padding-left: var(--space-4);
+  margin-block: var(--space-3);
+}
+
+/* ─── Forms ───────────────────────────────────────────────────────────────── */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+label {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+textarea {
+  width: 100%;
+  padding: var(--space-3);
+  font-family: var(--font-base);
+  font-size: var(--text-base);
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  resize: vertical;
+  min-height: 120px;
+  transition: border-color 0.15s;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+textarea:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-base);
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: #ffffff;
+  background-color: var(--color-accent);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+button:hover:not(:disabled) {
+  background-color: var(--color-accent-hover);
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Secondary button — cancel actions */
+button[data-variant="secondary"] {
+  background-color: transparent;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+}
+
+button[data-variant="secondary"]:hover:not(:disabled) {
+  background-color: var(--color-surface);
+}
+
+/* Theme toggle */
+header button {
+  background-color: transparent;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-sm);
+}
+
+header button:hover:not(:disabled) {
+  background-color: var(--color-surface);
+}
+
+/* ─── Suggestion Block ────────────────────────────────────────────────────── */
+
+[role="alert"] {
+  background-color: var(--color-suggestion-bg);
+  border: 1px solid var(--color-suggestion-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+[role="alert"] > p {
+  font-weight: 500;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+[role="alert"] > div,
+[role="alert"] > form,
+[role="alert"] > span {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+/* ─── Result Block ────────────────────────────────────────────────────────── */
+
+section[aria-label="Grammar analysis result"] {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+section[aria-label="Grammar analysis result"] [role="region"] {
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--color-text);
+  overflow-y: auto;
+  max-height: 400px;
+  white-space: pre-wrap;
+}
+
+/* ─── Utilities ───────────────────────────────────────────────────────────── */
+
+[role="alert"][aria-live="polite"]:not([class*="suggestion"]) {
+  color: var(--color-error);
+  font-size: var(--text-sm);
+}
+
+p[role="alert"] {
+  color: var(--color-error);
+  font-size: var(--text-sm);
+}
+
+/* ─── Markdown content (lists, paragraphs) ───────────────────────────────── */
+
+section[aria-label="Grammar analysis result"] ul,
+section[aria-label="Grammar analysis result"] ol {
+  padding-left: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+section[aria-label="Grammar analysis result"] ul {
+  list-style-type: disc;
+}
+
+section[aria-label="Grammar analysis result"] ol {
+  list-style-type: decimal;
+}
+
+section[aria-label="Grammar analysis result"] p + p {
+  margin-top: var(--space-3);
+}
+
+/* ─── Loader ──────────────────────────────────────────────────────────────── */
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  padding-block: var(--space-6);
+}
+
+.loader::after {
+  content: '';
+  width: 2rem;
+  height: 2rem;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+/* ─── Responsive — 768px ──────────────────────────────────────────────────── */
+
+@media (min-width: 768px) {
+  [data-theme] {
+    padding: var(--space-8);
+  }
+
+  h1 {
+    font-size: var(--text-2xl);
+  }
+
+  textarea {
+    min-height: 160px;
+  }
+
+  [role="alert"] > div,
+  [role="alert"] > span {
+    flex-direction: row;
+  }
+}
