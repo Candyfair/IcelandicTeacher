@@ -1,7 +1,6 @@
 import {
   OLLAMA_BASE_URL,
   MODEL_NAME,
-  MODEL_PARAMETERS,
   REQUEST_TIMEOUT_MS,
 } from '../config/config.js';
 
@@ -18,7 +17,7 @@ export async function generate(prompt, options = {}) {
         model: MODEL_NAME,
         prompt,
         stream: false,
-        options: { ...MODEL_PARAMETERS, ...options },
+        options,
       }),
     });
 
@@ -51,7 +50,7 @@ export async function* generateStream(prompt, options = {}) {
         model: MODEL_NAME,
         prompt,
         stream: true,
-        options: { ...MODEL_PARAMETERS, ...options },
+        options,
       }),
     });
 
