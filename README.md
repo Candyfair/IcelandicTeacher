@@ -65,13 +65,25 @@ npm install
 cd frontend && npm install && cd ..
 ```
 
-### 4. Build the frontend
+### 4. Start Ollama and load the model
+
+Make sure Ollama is running, then start the model:
+
+```bash
+ollama serve          # starts the Ollama server (skip if already running)
+ollama run llama3:8b  # loads the model into memory
+```
+
+> You can stop `ollama run` once the model is loaded — the server keeps it in memory.
+> To verify Ollama is ready: `curl http://localhost:11434`
+
+### 5. Build the frontend
 
 ```bash
 cd frontend && npm run build && cd ..
 ```
 
-### 5. Start the server
+### 6. Start the server
 
 ```bash
 npm start
@@ -129,6 +141,12 @@ IcelandicTeacher/
         ├── services/api.js     # SSE client
         └── locales/            # fr.js, en.js
 ```
+
+---
+
+## Roadmap
+
+See the [open issues](https://github.com/Candyfair/IcelandicTeacher/issues) for the full list of planned features and known bugs.
 
 ---
 
