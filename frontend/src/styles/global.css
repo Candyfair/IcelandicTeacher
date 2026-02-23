@@ -30,6 +30,7 @@
   --color-bg: hsl(69, 25%, 90%);
   --color-surface: hsl(50, 100%, 98%);
   --color-border: hsl(68, 25%, 67%);
+  --color-separator: hsl(68, 39%, 30%);
   --color-text: hsl(69, 25%, 20%);
   --color-text-muted: hsl(68, 25%, 67%);
   --color-accent: hsl(68, 53%, 73%);
@@ -50,6 +51,7 @@
   --color-bg: hsl(69, 25%, 20%);
   --color-surface: hsl(68, 39%, 30%);
   --color-border: hsl(68, 53%, 73%);
+  --color-separator: hsl(68, 39%, 30%);
   --color-text: hsl(50, 100%, 98%);
   --color-text-muted: hsl(68, 53%, 73%);
   --color-accent: hsl(68, 53%, 73%);
@@ -88,8 +90,20 @@ header {
   align-items: flex-end;
   flex-direction: column;
   padding-block: var(--space-4);
-  border-bottom: 1px solid var(--color-border);
+  padding-bottom: calc(var(--space-4) + 10px);
   margin-bottom: var(--space-6);
+  position: relative;
+}
+
+header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0px;
+  right: 5px;
+  height: 10px;
+  background: var(--color-separator);
+  border-radius: 9999px;
 }
 
 .header-wrapper {
