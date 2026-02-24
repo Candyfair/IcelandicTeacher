@@ -5,22 +5,29 @@ import ResultBlock from './components/ResultBlock.jsx';
 import ThemeToggle from './components/ThemeToggle.jsx';
 import { fr } from './locales/fr.js';
 import { en } from './locales/en.js';
+import titleFR from './assets/title-fr.svg';
+import titleEN from './assets/title-en.svg';
+import teacher from './assets/teacher.svg';
 
 const LOCALES = { fr, en };
 const BASE_CONTEXT = 'Icelandic grammar analysis — translate naturally then analyse word by word.';
 
 export default function App() {
-  // Theme
-  const [theme, setTheme] = useState('light');
+  // Theme — persisted in localStorage
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem('theme') ?? 'light'
+  );
+  document.documentElement.dataset.theme = theme;
   function toggleTheme() {
-    setTheme((t) => (t === 'light' ? 'dark' : 'light'));
+    setTheme((t) => {
+      const next = t === 'light' ? 'dark' : 'light';
+      localStorage.setItem('theme', next);
+      return next;
+    });
   }
 
   // Language — default French
   const [lang, setLang] = useState('fr');
-  function toggleLang() {
-    setLang((l) => (l === 'fr' ? 'en' : 'fr'));
-  }
   const t = LOCALES[lang];
 
   // Language directive is embedded in context — flows through to AI prompt
@@ -37,19 +44,34 @@ export default function App() {
   } = useGrammarAnalysis(exerciseContext);
 
   return (
-    <div
-      data-theme={theme}
-      style={{ maxWidth: '720px', margin: '0 auto', padding: '1rem' }}
-    >
+    <div className="app-wrapper">
       {/* Header */}
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h1>{t.title}</h1>
-        <div style={{ display: 'flex', gap: '0.5rem' }}>
-          {/* Language toggle */}
-          <button type="button" onClick={toggleLang} aria-label={`Switch to ${t.langToggle}`}>
-            {t.langToggle}
-          </button>
-          <ThemeToggle theme={theme} onToggle={toggleTheme} />
+          <div className="options-wrapper" style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+            <ThemeToggle theme={theme} onToggle={toggleTheme} />
+            {/* Language toggle */}
+            <div className="lang-toggle">
+              <button
+                type="button"
+                className={`lang-option${lang === 'fr' ? ' active' : ''}`}
+                onClick={() => setLang('fr')}
+                aria-pressed={lang === 'fr'}
+                style={{height: 18}}
+              >FR</button>
+              <button
+                type="button"
+                className={`lang-option${lang === 'en' ? ' active' : ''}`}
+                onClick={() => setLang('en')}
+                aria-pressed={lang === 'en'}
+                style={{height: 18}}
+              >EN</button>
+              <div className={`lang-underline${lang === 'en' ? ' shifted' : ''}`} />
+            </div>
+          </div>
+
+        <div className="header-wrapper">
+          <img src={lang === 'fr' ? titleFR : titleEN} style={{height: 145 }} alt={t.title} />
+          <img src={teacher} alt="teacher" />
         </div>
       </header>
 
@@ -76,6 +98,14 @@ export default function App() {
         {/* Analysis result */}
         {analysis && <ResultBlock analysis={analysis} t={t} />}
       </main>
+
+      <footer>
+        <p>
+          © {new Date().getFullYear()} <a href="https://github.com/Candyfair" target="_blank" rel="noopener noreferrer">Candyfair</a>
+          {' — '}{t.footerLicense}{' — '}
+          <a href="https://github.com/Candyfair/IcelandicTeacher" target="_blank" rel="noopener noreferrer">{t.footerGithub}</a>
+        </p>
+      </footer>
     </div>
   );
 }

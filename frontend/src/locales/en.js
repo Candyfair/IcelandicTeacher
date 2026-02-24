@@ -8,4 +8,6 @@ export const en = {
   langToggle: 'FR',
   // Injected into exerciseContext to set AI response language
   aiInstruction: 'Respond in English. Use English headings.',
+  footerLicense: 'GPL-3.0 License',
+  footerGithub: 'Source code on GitHub',
 };
