@@ -56,12 +56,14 @@ export default function App() {
                 className={`lang-option${lang === 'fr' ? ' active' : ''}`}
                 onClick={() => setLang('fr')}
                 aria-pressed={lang === 'fr'}
+                style={{height: 18}}
               >FR</button>
               <button
                 type="button"
                 className={`lang-option${lang === 'en' ? ' active' : ''}`}
                 onClick={() => setLang('en')}
                 aria-pressed={lang === 'en'}
+                style={{height: 18}}
               >EN</button>
               <div className={`lang-underline${lang === 'en' ? ' shifted' : ''}`} />
             </div>

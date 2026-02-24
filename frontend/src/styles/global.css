@@ -35,6 +35,7 @@
   --color-text-muted: hsl(68, 25%, 67%);
   --color-accent: hsl(68, 53%, 73%);
   --color-accent-hover: hsl(68, 53%, 48%);
+  --color-link: hsl(68, 25%, 67%);
   --color-button-text: hsl(69, 25%, 20%);
   --color-error: hsl(0, 72%, 51%);
   --color-suggestion-bg: hsl(48, 100%, 96%);
@@ -56,6 +57,7 @@
   --color-text-muted: hsl(68, 53%, 73%);
   --color-accent: hsl(68, 53%, 73%);
   --color-accent-hover: hsl(68, 53%, 48%);
+  --color-link: hsl(68, 53%, 73%);
   --color-button-text: hsl(69, 25%, 20%);
   --color-error: hsl(0, 91%, 71%);
   --color-suggestion-bg: hsl(46, 51%, 8%);
@@ -82,6 +84,7 @@ body {
   max-width: 720px;
   margin: 0 auto;
   padding: var(--space-4);
+  padding-top: 0;
 }
 
 header {
@@ -157,7 +160,7 @@ blockquote {
 form {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-1);
 }
 
 label {
@@ -208,6 +211,7 @@ button {
   border-radius: var(--radius-md);
   cursor: pointer;
   transition: background-color 0.15s;
+  height: 43px;
 }
 
 /* button:hover:not(:disabled) {
@@ -387,7 +391,7 @@ footer {
 }
 
 footer a {
-  color: var(--color-accent);
+  color: var(--color-link);
   text-decoration: none;
 }
 
@@ -422,14 +426,29 @@ footer a:hover {
 @media (min-width: 768px) {
   .app-wrapper {
     padding: var(--space-8);
+    padding-top: 0;
   }
 
   h1 {
     font-size: var(--text-2xl);
   }
 
-  textarea {
-    min-height: 160px;
+  form {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 16px;
+  }
+
+  .input-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  form button[type="submit"] {
+    width: 190px;
+    flex-shrink: 0;
   }
 
   [role="alert"] > div,

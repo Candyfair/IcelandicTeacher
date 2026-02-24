@@ -20,21 +20,31 @@ export default function InputForm({ inputText, onChange, onSubmit, isLoading, t 
     onSubmit();
   }
 
+  function handleKeyDown(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      if (!isLoading && inputText.trim()) onSubmit();
+    }
+  }
+
   return (
     <form onSubmit={handleSubmit} aria-busy={isLoading}>
       {/* Input section */}
-      <label htmlFor="grammar-input">{label}</label>
-      <textarea
-        ref={textareaRef}
-        id="grammar-input"
-        value={inputText}
-        onChange={(e) => onChange(e.target.value)}
-        disabled={isLoading}
-        rows={1}
-        placeholder={placeholder}
-        style={{ minHeight: 'unset', resize: 'none', overflow: 'hidden' }}
-        required
-      />
+      <div className="input-group">
+        <label htmlFor="grammar-input">{label}</label>
+        <textarea
+          ref={textareaRef}
+          id="grammar-input"
+          value={inputText}
+          onChange={(e) => onChange(e.target.value)}
+          onKeyDown={handleKeyDown}
+          disabled={isLoading}
+          rows={1}
+          placeholder={placeholder}
+          style={{ minHeight: 'unset', resize: 'none', overflow: 'hidden' }}
+          required
+        />
+      </div>
 
       {/* Submit */}
       <button type="submit" disabled={isLoading || !inputText.trim()}>
