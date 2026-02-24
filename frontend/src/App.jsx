@@ -28,9 +28,6 @@ export default function App() {
 
   // Language — default French
   const [lang, setLang] = useState('fr');
-  function toggleLang() {
-    setLang((l) => (l === 'fr' ? 'en' : 'fr'));
-  }
   const t = LOCALES[lang];
 
   // Language directive is embedded in context — flows through to AI prompt
@@ -50,12 +47,24 @@ export default function App() {
     <div className="app-wrapper">
       {/* Header */}
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div className="options-wrapper" style={{ display: 'flex', gap: '0.5rem' }}>
-            {/* Language toggle */}
-            <button type="button" onClick={toggleLang} aria-label={`Switch to ${t.langToggle}`}>
-              {t.langToggle}
-            </button>
+          <div className="options-wrapper" style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
             <ThemeToggle theme={theme} onToggle={toggleTheme} />
+            {/* Language toggle */}
+            <div className="lang-toggle">
+              <button
+                type="button"
+                className={`lang-option${lang === 'fr' ? ' active' : ''}`}
+                onClick={() => setLang('fr')}
+                aria-pressed={lang === 'fr'}
+              >FR</button>
+              <button
+                type="button"
+                className={`lang-option${lang === 'en' ? ' active' : ''}`}
+                onClick={() => setLang('en')}
+                aria-pressed={lang === 'en'}
+              >EN</button>
+              <div className={`lang-underline${lang === 'en' ? ' shifted' : ''}`} />
+            </div>
           </div>
 
         <div className="header-wrapper">
@@ -87,6 +96,14 @@ export default function App() {
         {/* Analysis result */}
         {analysis && <ResultBlock analysis={analysis} t={t} />}
       </main>
+
+      <footer>
+        <p>
+          © {new Date().getFullYear()} <a href="https://github.com/Candyfair" target="_blank" rel="noopener noreferrer">Candyfair</a>
+          {' — '}{t.footerLicense}{' — '}
+          <a href="https://github.com/Candyfair/IcelandicTeacher" target="_blank" rel="noopener noreferrer">{t.footerGithub}</a>
+        </p>
+      </footer>
     </div>
   );
 }
