@@ -10,4 +10,5 @@ export const en = {
   aiInstruction: 'Respond in English. Use English headings.',
   footerLicense: 'GPL-3.0 License',
   footerGithub: 'Source code on GitHub',
+  ollamaUnreachable: 'Ollama is unreachable. Start the server with: ollama serve',
 };
