@@ -18,6 +18,14 @@ async function post(endpoint, body) {
 }
 
 // Public API
+export async function checkHealth() {
+  const response = await fetch(`${BASE_URL}/health`, {
+    signal: AbortSignal.timeout(5000),
+  });
+  if (!response.ok) throw new Error('Health check failed');
+  return response.json();
+}
+
 export function validateText(text, exerciseContext) {
   return post('/validate', { text, exerciseContext });
 }

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useGrammarAnalysis } from './hooks/useGrammarAnalysis.js';
+import { useOllamaStatus } from './hooks/useOllamaStatus.js';
 import InputForm from './components/InputForm.jsx';
 import ResultBlock from './components/ResultBlock.jsx';
 import ThemeToggle from './components/ThemeToggle.jsx';
@@ -32,6 +33,9 @@ export default function App() {
 
   // Language directive is embedded in context — flows through to AI prompt
   const exerciseContext = `${BASE_CONTEXT} ${t.aiInstruction}`;
+
+  // Ollama connection status — checked on mount
+  const ollamaStatus = useOllamaStatus();
 
   // Grammar flow
   const {
@@ -82,6 +86,7 @@ export default function App() {
           onChange={setInputText}
           onSubmit={handleSubmit}
           isLoading={isLoading}
+          ollamaStatus={ollamaStatus}
           t={t}
         />
 

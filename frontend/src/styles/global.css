@@ -399,6 +399,31 @@ footer a:hover {
   text-decoration: underline;
 }
 
+/* ─── Ollama Status ───────────────────────────────────────────────────────── */
+
+.ollama-icon {
+  flex-shrink: 0;
+  margin-left: 6px;
+}
+
+.ollama-icon--error {
+  color: var(--color-error);
+}
+
+.ollama-error {
+  margin-top: var(--space-2);
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--color-error);
+  border-radius: var(--radius-md);
+}
+
+[data-theme="dark"] .ollama-error {
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--color-error);
+  background-color: color-mix(in srgb, var(--color-error) 12%, transparent);
+}
+
 /* ─── Loader ──────────────────────────────────────────────────────────────── */
 
 @keyframes spin {
@@ -449,6 +474,10 @@ footer a:hover {
   form button[type="submit"] {
     width: 190px;
     flex-shrink: 0;
+  }
+
+  .ollama-error {
+    width: 100%;
   }
 
   [role="alert"] > div,
