@@ -25,6 +25,15 @@
 | Markdown | react-markdown + remark-gfm |
 
 ---
+## Screenshots
+
+- Desktop view :
+![Analyse grammaticale](assets/desktop.png)
+
+- Mobile view : French interface, dark mode, server disconnected (English interface)
+![Interface bilingue](assets/mobile.png)
+
+---
 
 ## Prerequisites
 
