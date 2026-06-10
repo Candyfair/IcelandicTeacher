@@ -2,6 +2,10 @@
 
 **Local AI-powered Icelandic grammar teacher.** Analyse sentences word by word with streaming responses, anti-hallucination verification, and a bilingual (FR/EN) interface. Runs fully offline with Ollama.
 
+Technical article in 2 parts on my blog : 
+- [Part 1](https://candygetshandy.com/icelandic-grammar-teacher-part-1/) : Why did I want to do it?
+- [Part 2](https://candygetshandy.com/icelandic-grammar-teacher-part-2/) : How I made it.
+
 ---
 
 ## Features
